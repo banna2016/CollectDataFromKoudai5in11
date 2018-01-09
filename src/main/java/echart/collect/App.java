@@ -102,7 +102,7 @@ public class App {
 	{
 		try {
 			Document doc = Jsoup.connect(
-			        "http://www.xicidaili.com/nn/")
+			        "http://www.xicidaili.com/nt/")//普通代理：http://www.xicidaili.com/nt/ 国内http代理：http://www.xicidaili.com/wt/
 			         .maxBodySize(0)  
 			         .userAgent("Mozilla")
 			         .timeout(20000) 
@@ -175,7 +175,7 @@ public class App {
 		{
 			maxIssueId = dataToDb.findMaxIssueIdFromDescDb();
 		}
-		String name = "HUBSYY";//HUBSYY:湖北 ；AHSYY：安徽
+		String name = "NMGSYY";//HUBSYY:湖北 ；AHSYY：安徽
 		SrcFiveDataBean srcFiveDataBean = parseDocumentFromUrl(name);
 		if(null!=srcFiveDataBean&&!maxIssueId.equals(srcFiveDataBean.getIssueId()))
 		{
@@ -245,6 +245,7 @@ public class App {
         		if(i==iplist.size()-1)
         		{
         			initIPList();
+        			getHttpResponseByIplist(allConfigUrl,0);
         		}
         		else
         		{
@@ -318,9 +319,9 @@ public class App {
     }
 	
 	//校验有效且速度快的地址
-	public static List<IPAddress> Filter(List<IPAddress> list) {
+	public static void Filter(List<IPAddress> list) {
         List<IPAddress> newlist = new ArrayList<>();
-
+        
         Collections.sort(list, new Comparator<IPAddress>() {
             @Override
             public int compare(IPAddress o1, IPAddress o2) {
@@ -330,14 +331,14 @@ public class App {
 
         //只返回容器中前100的对象
         for(int i = 0; i < list.size(); i++) {
-            if(i < 100) {
+            if(i < 10) {
                 newlist.add(list.get(i));
             }else {
                 break;
             }
         }
-
-        return newlist;
+        iplist.clear();
+        iplist=newlist;
     }
 	
 	public static List<IPAddress> IPIsable(List<IPAddress> ipMessages) {
