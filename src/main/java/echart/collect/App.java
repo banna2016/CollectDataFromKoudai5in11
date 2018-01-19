@@ -175,7 +175,7 @@ public class App {
 		{
 			maxIssueId = dataToDb.findMaxIssueIdFromDescDb();
 		}
-		String name = "NMGSYY";//HUBSYY:湖北 ；AHSYY：安徽
+		String name = "HUBSYY";//HUBSYY:湖北 ；AHSYY：安徽
 		SrcFiveDataBean srcFiveDataBean = parseDocumentFromUrl(name);
 		if(null!=srcFiveDataBean&&!maxIssueId.equals(srcFiveDataBean.getIssueId()))
 		{

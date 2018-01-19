@@ -320,7 +320,7 @@ public class DataToDb
 		        boolean booleanautoCommit = conn.getAutoCommit();
 		        
 		        conn.setAutoCommit(false);
-		        stmt = (PreparedStatement)conn.prepareStatement("");
+		        stmt = conn.prepareStatement("");
 		        
 		        //先将所有的遗漏值都加1，然后再下面的代码中判断不同组合的当前遗漏值是否要清0
 		        stmt.addBatch("UPDATE "+App.descMissTbName+" SET ISSUE_NUMBER = " + srcDataBean.getIssueId() + "," + 
